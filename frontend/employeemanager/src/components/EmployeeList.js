@@ -1,13 +1,42 @@
-import React from "react";
-import AddEmployee from "./AddEmployee";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import EmployeeService from "../services/EmployeeService";
+import Employee from "./Employee";
 
 const EmployeeList = () => {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(true);
+  const [employees, setEmployees] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await EmployeeService.getEmployees();
+        setEmployees(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  const deleteEmployee = (e, id) => {
+    e.preventDefault();
+    EmployeeService.deleteEmploye(id).then((res) => {
+      if (employees) {
+        setEmployees((preElement) => {
+          return preElement.filter((employee) => employee.id !== id);
+        });
+      }
+    });
+  };
+
   return (
     <div className="container mx-auto my-10">
-      <div className="flex h-12 my-12 justify-center items-center">
+      <div className="flex h-12 my-8 justify-center items-center">
         <button
           onClick={() => navigate("/addEmployee")}
           className="rounded-md bg-gray-800 font-semibold text-white px-4 py-3"
@@ -33,33 +62,17 @@ const EmployeeList = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-gray-400">
-            <tr>
-              <td className="text-left px-6 py-4 whitespace-nowrap">
-                <div className="text-md font-semibold text-gray-900">
-                  Austin
-                </div>
-              </td>
-              <td className="text-left px-6 py-4 whitespace-nowrap">
-                <div className="text-md font-semibold text-gray-900">Rush</div>
-              </td>
-              <td className="text-left px-6 py-4 whitespace-nowrap">
-                <div className="text-md font-semibold text-gray-900">
-                  rushaustin44@gmail.com
-                </div>
-              </td>
-              <td className="text-right px-6 py-4 whitespace-nowrap">
-                <a href="#" className="text-blue-600 hover:text-blue-800 px-4">
-                  {" "}
-                  Edit{" "}
-                </a>
-                <a href="#" className="text-red-600 hover:text-red-800">
-                  {" "}
-                  Delete{" "}
-                </a>
-              </td>
-            </tr>
-          </tbody>
+          {!loading && (
+            <tbody className="bg-gray-400">
+              {employees.map((employee) => (
+                <Employee
+                  employee={employee}
+                  deleteEmployee={deleteEmployee}
+                  key={employee.id}
+                ></Employee>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>

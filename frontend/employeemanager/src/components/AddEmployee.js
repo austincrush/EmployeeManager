@@ -74,13 +74,13 @@ const AddEmployee = () => {
         <div className="flex items-center justify-center h-14 w-full my-4 space-x-4 pt-4">
           <button
             onClick={() => navigate("/employeeList")}
-            className="text-white rounded font-semibold px-3 py-2 bg-red-500 hover:bg-red-700"
+            className="shadow-lg border-b border-gray-400 text-white rounded-md font-semibold px-3 py-2 bg-red-500 hover:bg-red-700"
           >
             Cancel
           </button>
           <button
             onClick={saveEmployee}
-            className=" text-white rounded font-semibold px-3 py-2 bg-green-500 hover:bg-green-700"
+            className="shadow-lg border-b border-gray-400 text-white rounded-md font-semibold px-3 py-2 bg-green-500 hover:bg-green-700"
           >
             Add
           </button>

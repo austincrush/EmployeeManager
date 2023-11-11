@@ -36,15 +36,15 @@ const EmployeeList = () => {
 
   return (
     <div className="container mx-auto my-10">
-      <div className="flex h-12 my-8 justify-center items-center">
+      <div className="flex h-12 my-8 justify-center items-center ">
         <button
           onClick={() => navigate("/addEmployee")}
-          className="rounded-md bg-gray-800 font-semibold text-white px-4 py-3"
+          className="rounded-md border-b border-gray-400 shadow-lg bg-gray-800 font-semibold text-white px-4 py-3"
         >
           Add Employee
         </button>
       </div>
-      <div className="flex shadow-xl border-b border-gray-300">
+      <div className="shadow-xl overflow-hidden rounded-lg border-b border-gray-300">
         <table className="min-w-full">
           <thead className="bg-gray-800">
             <tr>

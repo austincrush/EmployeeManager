@@ -26,16 +26,16 @@ const Employee = ({ employee, deleteEmployee }) => {
           {employee.email}
         </div>
       </td>
-      <td className="text-right px-6 py-4 whitespace-nowrap">
+      <td className="text-right py-4 whitespace-nowrap">
         <a
           onClick={(e, id) => editEmployee(e, employee.id)}
-          className="text-blue-600 hover:text-blue-800 hover:cursor-pointer px-4"
+          className="shadow-lg rounded-md border-b border-gray-800 text-white bg-blue-600 hover:bg-blue-800 hover:cursor-pointer py-1 px-3"
         >
           Edit
         </a>
         <a
           onClick={(e, id) => deleteEmployee(e, employee.id)}
-          className="text-red-600 hover:text-red-800 hover:cursor-pointer"
+          className="shadow-lg rounded-md border-b border-gray-800 text-white bg-red-600 hover:bg-red-800 hover:cursor-pointer py-1 px-3 mx-2"
         >
           Delete
         </a>
